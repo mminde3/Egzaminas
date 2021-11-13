@@ -1,0 +1,56 @@
+﻿@model Pastomatas.Dto.PackageWithTerminals
+
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col">
+            <h3>Edit packag</h3>
+        </div>
+        <div class="row align-items-end">
+            <a class="btn btn-secondary" asp-area="" asp-controller="PostPackage" asp-action="PackageIndex">Return</a>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("PackageEdit", "PostPackage", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Package.PackageId)
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col">
+                @Html.DropDownListFor(model => model.Package.TerminalId,
+                new MultiSelectList(Model.Terminals.OrderBy(c => c.Town), "TerminalId", "Town"))
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                @Html.LabelFor(M => M.Package.ReceiverName)
+                @Html.TextBoxFor(s => s.Package.ReceiverName)
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                @Html.LabelFor(M => M.Package.Weight)
+                @Html.TextBoxFor(s => s.Package.Weight)
+                <spam>Weight in Kg</spam>
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                @Html.LabelFor(M => M.Package.Phone)
+                <spam> +370</spam>
+                @Html.TextBoxFor(s => s.Package.Phone)
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                @Html.LabelFor(M => M.Package.Text)
+                @Html.TextBoxFor(s => s.Package.Text)
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                <input type="submit" class="btn btn-primary" value="Update" />
+            </div>
+        </div>
+    </div>
+}

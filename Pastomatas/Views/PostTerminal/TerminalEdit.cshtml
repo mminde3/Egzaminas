@@ -1,0 +1,42 @@
+﻿@model PostTerminalModel
+
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col">
+            <h3>Edit terminal data</h3>
+        </div>
+        <div class="row align-items-end">
+            <a class="btn btn-secondary" asp-area="" asp-controller="PostTerminal" asp-action="TerminalIndex">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("TerminalEdit", "PostTerminal", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.TerminalId)
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col">
+                @Html.LabelFor(M => M.Town)
+                @Html.TextBoxFor(s => s.Town)
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                @Html.LabelFor(M => M.Capacity)
+                @Html.TextBoxFor(s => s.Capacity)
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                @Html.LabelFor(M => M.Code)
+                @Html.TextBoxFor(s => s.Code)
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                <input type="submit" class="btn btn-primary" value="Save" />
+            </div>
+        </div>
+    </div>
+}

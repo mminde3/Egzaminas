@@ -1,0 +1,59 @@
+﻿@model Pastomatas.Dto.ViewPackageIndex
+
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col">
+            <h3>Package list</h3>
+        </div>
+        <div class="row align-items-end">
+            <a class="btn btn-secondary" asp-area="" asp-controller="PostPackage" asp-action="PackageAdd">Add Package</a>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("PackageFilter", "PostPackage", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row align-items-start">
+            <div>
+                <spam>Fiter by terminal  </spam>
+            </div>
+            <div>
+                @Html.DropDownListFor(model => model.TerminalId,
+                    new MultiSelectList(Model.Terminals.OrderBy(c => c.Town), "TerminalId", "Town"), "All")
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="Filter" />
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Info</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var package in @Model.Packages)
+        {
+            <tr>
+                <th class="font-weight-normal">@package.PackageId</th>
+                <td>@package.ReceiverName</td>
+                <td>+370 @package.Phone</td>
+                <td>@package.Weight Kg</td>
+                <td>@package.Text</td>
+                <td>
+                    @Html.ActionLink("Remove", "PackageRemove", "PostPackage", new { id = package.PackageId }, null) |
+                    @Html.ActionLink("Edit", "PackageEdit", "PostPackage", new { id = package.PackageId }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

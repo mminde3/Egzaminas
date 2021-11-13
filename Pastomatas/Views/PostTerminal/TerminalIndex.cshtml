@@ -1,0 +1,37 @@
+﻿@model List<PostTerminalModel>
+
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col">
+            <h3>Terminal list</h3>
+        </div>
+        <div class="row align-items-end">
+            <a class="btn btn-secondary" asp-area="" asp-controller="PostTerminal" asp-action="TerminalAdd">Add terminal</a>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Town</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var terminal in @Model)
+        {
+            <tr>
+                <th class="font-weight-normal">@terminal.Code</th>
+                <td>@terminal.Town</td>
+                <td>@terminal.Capacity</td>
+                <td>
+                    @Html.ActionLink("Remove", "TerminalRemove", "PostTerminal", new { id = terminal.TerminalId }, null) |
+                    @Html.ActionLink("Edit", "TerminalEdit", "PostTerminal", new { id = terminal.TerminalId }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
